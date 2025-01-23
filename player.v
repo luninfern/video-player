@@ -2,8 +2,8 @@ import os
 import gg
 import gx
 import ffmpeg
-import libswscale
-import libswresample
+import libswscale as _
+import libswresample as _
 import time
 import sokol.audio
 

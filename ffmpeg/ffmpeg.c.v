@@ -1,13 +1,12 @@
 module ffmpeg
 
-#include <libavutil/avutil.h>
-#include <libavutil/channel_layout.h>
-#include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
+#include <libavutil/avutil.h>
+#include <libavcodec/avcodec.h>
 
+#pkgconfig --libs --cflags libavformat
 #pkgconfig --libs --cflags libavutil
 #pkgconfig --libs --cflags libavcodec
-#pkgconfig --libs --cflags libavformat
 
 @[typedef]
 pub struct C.AVCodec {

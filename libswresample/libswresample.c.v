@@ -1,7 +1,5 @@
 module libswresample
 
-import ffmpeg
-
 #include <libavutil/avutil.h>
 #include <libavutil/channel_layout.h>
 #include <libavutil/samplefmt.h>
