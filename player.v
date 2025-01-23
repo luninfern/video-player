@@ -23,7 +23,7 @@ mut:
 struct AudioFrame {
 mut:
 	samples     []f32
-	channels    int
+	//channels    int
 	sample_rate int
 	num_samples int
 }
@@ -245,7 +245,7 @@ fn (mut dec Decoder) decode() {
 						break
 					}
 
-					dec.out.audio_data << get_frame(audio_frame, dec.audio_dec_ctx, ffmpeg.AVSampleFormat.fltp).samples
+					dec.out.audio_data << get_samples(audio_frame, dec.audio_dec_ctx, ffmpeg.AVSampleFormat.fltp)
 				}
 			}
 
@@ -335,14 +335,18 @@ fn resample_frame(frame &C.AVFrame, codec_ctx &C.AVCodecContext, out_sample_rate
 	return []f32{}
 }
 
+fn get_samples(frame &C.AVFrame, codec_ctx &C.AVCodecContext, out_sample_fmt ffmpeg.AVSampleFormat) []f32 {
+	return resample_frame(frame, codec_ctx, 48000, 1, out_sample_fmt)
+}
+
 fn get_frame(frame &C.AVFrame, codec_ctx &C.AVCodecContext, out_sample_fmt ffmpeg.AVSampleFormat) AudioFrame {
-	mut samples := resample_frame(frame, codec_ctx, 48000, 1, out_sample_fmt)
+	mut samples := get_samples(frame, codec_ctx, out_sample_fmt)
 
 	mut audioframe := AudioFrame{
 		samples:     samples
 		sample_rate: codec_ctx.sample_rate
 		num_samples: frame.nb_samples
-		channels:    codec_ctx.channels
+		//channels:    codec_ctx.channels
 	}
 
 	return audioframe
