@@ -67,7 +67,7 @@ pub struct C.AVCodecContext {
 	frame_number int
 
 	sample_rate int
-	channels int
+	//channels int
 
 	sample_fmt AVSampleFormat
 	ch_layout C.AVChannelLayout
