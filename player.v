@@ -67,7 +67,7 @@ fn (app App) get_pixel(x int, y int) u32 {
 fn (mut app App) run() {
 	app.ctx = gg.new_context(
 		bg_color:     gx.rgb(174, 198, 255)
-		window_title: 'Demo'
+		window_title: 'Video Player'
 		width:        app.width
 		height:       app.height
 		frame_fn:     frame
@@ -119,7 +119,7 @@ fn (mut dec Decoder) init(video_name string, decoder_output &DecoderOutput) {
 
 		ret = C.avformat_find_stream_info(dec.fmt_ctx, nil)
 		if ret < 0 {
-			println("avformat_find_stream_info failed: Couldn't find stream information")
+			println('Could not find stream information')
 			exit(ret)
 		}
 
@@ -263,7 +263,7 @@ fn main() {
 	mut app := &App{}
 
 	if os.args.len != 2 {
-		println('enter a video name')
+		println('Enter a video name')
 		return
 	}
 
